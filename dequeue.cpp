@@ -61,6 +61,30 @@ class dequeue {
             return (strt_indx == end_indx);
         }
 
+        bool resize(int new_size) {
+            if(new_size == length()){
+                return true;
+            } elif(new_size > length()) {
+                new_buffer = T[new_size];
+                for(int i = 0; i < length(); i++){
+                    new_buffer[i] = buffer[(strt_indx + i) % buffer_size];
+                }
+                end_indx = length();
+                strt_indx = 0;
+                buffer_size = new_size;
+                buffer = new_buffer;
+                return true;
+            } elif(new_size < length()){
+                if(new_size > end_indx){
+                    // We can simply cut off the end of our buffer.
+                    
+                    return true;
+                } else {
+                    // Resizing will require us to shift all the elements back.
+                }
+            }
+        }
+
 
     private:
         int strt_indx;
