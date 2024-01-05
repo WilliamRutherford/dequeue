@@ -19,16 +19,22 @@ class dequeue {
         }
 
         bool push(T val) {
+            // We have to check if our start and end indices are colliding into each other. 
+            if((end_indx - strt_indx) == buffer_size) {
+                resize(buffer_size * 2);
+            }
             buffer[end_indx % buffer_size] = val;
             end_indx++;
             return true;
         }
 
         bool push_back(T val) {
+            if((end_indx - strt_indx) == buffer_size) {
+                resize(buffer_size * 2);
+            }
             strt_indx--;
             buffer[strt_indx % buffer_size] = val;
             return true;
-            
         }
 
         T pop() {
@@ -77,7 +83,7 @@ class dequeue {
             } elif(new_size < length()){
                 if(new_size > end_indx){
                     // We can simply cut off the end of our buffer.
-                    
+
                     return true;
                 } else {
                     // Resizing will require us to shift all the elements back.
